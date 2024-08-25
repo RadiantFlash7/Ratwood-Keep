@@ -166,9 +166,13 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 			log_game("Major Antagonist: Rebellion")
 		if(36 to 80)
 			//WWs and Vamps now normally roll together
-			pick_vampires()
+			if(num_players() >= 65) //as in 65 roundstart-ready players 
+				pick_vampires()
+				log_game("Major Antagonist: Vampires and Werewolves")
+			else
+				pick_rebels()
+				log_game("Major Antagonist: Rebels and Werewolves")
 			pick_werewolves()
-			log_game("Major Antagonist: Vampires and Werewolves")
 		if(81 to 100)
 			log_game("Major Antagonist: Extended") //gotta put something here.
 	
