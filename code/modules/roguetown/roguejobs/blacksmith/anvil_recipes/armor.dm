@@ -1,5 +1,5 @@
 /datum/anvil_recipe/armor
-	appro_skill = /datum/skill/craft/armorsmithing
+	appro_skill = /datum/skill/craft/blacksmithing
 	craftdiff = 1
 
 /datum/anvil_recipe/armor/ichainmail
@@ -62,6 +62,13 @@
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/clothing/suit/roguetown/armor/leather)
 	created_item = /obj/item/clothing/suit/roguetown/armor/leather/studded
+	i_type = "Armor"
+
+/datum/anvil_recipe/armor/lbrigandine
+	name = "Light Brigandine (+1 Cloth)"
+	req_bar = /obj/item/ingot/iron
+	additional_items = list(/obj/item/natural/cloth)
+	created_item = /obj/item/clothing/suit/roguetown/armor/brigandine/light
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/helmetgoblin
@@ -244,6 +251,14 @@
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/pigface
 	craftdiff = 2
+	i_type = "Armor"
+
+/datum/anvil_recipe/armor/helmetvolf
+	name = "Volf Face Helmet (+1 Steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/volfplate
+	craftdiff = 3
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/bascinet
