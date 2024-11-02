@@ -120,13 +120,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobspawn_override = list("Town Seelie")
 	delete_after_roundstart = FALSE
 
-/obj/effect/landmark/start/desertriderlate // Left behind for map compatibility 
+/obj/effect/landmark/start/desertriderlate // Left behind for map compatibility
 	name = "DesertRiderlate"
 	icon_state = "arrow"
 	jobspawn_override = list("Mercenary")
 	delete_after_roundstart = FALSE
 
-/obj/effect/landmark/start/grenzelhoftlate // Left behind for map compatibility 
+/obj/effect/landmark/start/grenzelhoftlate // Left behind for map compatibility
 	name = "Grenzelhoftlate"
 	icon_state = "arrow"
 	jobspawn_override = list("Mercenary")
@@ -145,7 +145,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/lord
-	name = "Lord"
+	name = "Duke"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/knight
@@ -273,7 +273,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/grabber
-	name = "Grabber"
+	name = "Thug"
 	icon_state = "arrow"
 
 
@@ -286,11 +286,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/guildsmith
-	name = "Guild smith"
+	name = "Guild Smith"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/tailor
-	name = "Tailor"
+/obj/effect/landmark/start/seamster
+	name = "Seamster"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/alchemist
@@ -330,11 +330,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/lady
-	name = "Lady Consort"
+	name = "Duchess Consort"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/prince
-	name = "Prince"
+	name = "Heir"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/prisonerr
@@ -820,7 +820,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 /obj/effect/landmark/underworldcoin
 	name = "ferryman coin"
 
-/obj/effect/landmark/underworldsafe // To prevent demons spawn camping will save a lot of ear rape.
+/obj/effect/landmark/underworldsafe // To prevent demons spawn camping.
 	name = "safe zone"
 
 GLOBAL_LIST_EMPTY(travel_tile_locations)

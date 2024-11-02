@@ -4,7 +4,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_VERY_SHUNNED_UP
 	outfit = /datum/outfit/job/roguetown/mercenary/sellsword
-	maximum_possible_slots = 5
+	maximum_possible_slots = 10
 	min_pq = 0
 	torch = FALSE
 	category_tags = list(CTAG_MERCENARY)
@@ -16,7 +16,6 @@
 	var/classes = list("Swordsman","Fencer", "Cutthroat")
 	var/classchoice = input("Choose your archetypes", "Available archetypes") as anything in classes
 	shoes = /obj/item/clothing/shoes/roguetown/armor/leather
-	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	gloves = /obj/item/clothing/gloves/roguetown/leather
 	belt = /obj/item/storage/belt/rogue/leather
@@ -34,7 +33,7 @@
 			if(prob(40))
 				beltr = /obj/item/rogueweapon/sword/long
 			shoes = /obj/item/clothing/shoes/roguetown/armor/leather
-			neck = /obj/item/storage/belt/rogue/pouch/coins/poor
+			neck = /obj/item/keyring/mercenary
 			pants = /obj/item/clothing/under/roguetown/trou/leather
 			gloves = /obj/item/clothing/gloves/roguetown/leather
 			belt = /obj/item/storage/belt/rogue/leather
@@ -71,7 +70,7 @@
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 			beltr = /obj/item/rogueweapon/sword/rapier
 			shoes = /obj/item/clothing/shoes/roguetown/armor/leather
-			neck = /obj/item/storage/belt/rogue/pouch/coins/poor
+			neck = /obj/item/keyring/mercenary
 			pants = /obj/item/clothing/under/roguetown/trou/leather
 			gloves = /obj/item/clothing/gloves/roguetown/leather
 			belt = /obj/item/storage/belt/rogue/leather
@@ -108,7 +107,7 @@
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor/red
 			beltr = /obj/item/rogueweapon/sword/cutlass
 			shoes = /obj/item/clothing/shoes/roguetown/armor/leather
-			neck = /obj/item/storage/belt/rogue/pouch/coins/poor
+			neck = /obj/item/keyring/mercenary
 			pants = /obj/item/clothing/under/roguetown/trou/leather
 			gloves = /obj/item/clothing/gloves/roguetown/leather
 			belt = /obj/item/storage/belt/rogue/leather

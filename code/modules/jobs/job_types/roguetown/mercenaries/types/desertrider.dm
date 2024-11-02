@@ -12,7 +12,7 @@
 		/datum/species/elf/dark,
 	)
 	outfit = /datum/outfit/job/roguetown/mercenary/desert_rider
-	maximum_possible_slots = 4
+	maximum_possible_slots = 10
 	min_pq = 2
 	torch = FALSE
 	cmode_music = 'sound/music/combat_desertrider.ogg'
@@ -28,12 +28,11 @@
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
 	backr = /obj/item/storage/backpack/rogue/satchel
 	backl = /obj/item/rogueweapon/sword/long/rider
-	beltl = /obj/item/flashlight/flare/torch
+	beltl = /obj/item/keyring/mercenary
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	pants = /obj/item/clothing/under/roguetown/chainlegs/iron
 	neck = /obj/item/clothing/neck/roguetown/shalal
 
-	backpack_contents = list(/obj/item/roguekey/mercenary)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)

@@ -472,6 +472,7 @@
 	blocksound = PLATEHIT
 	max_integrity = 200
 	w_class = WEIGHT_CLASS_NORMAL
+	armor_class = ARMOR_CLASS_LIGHT
 	clothing_flags = CANT_SLEEP_IN
 	resistance_flags = FIRE_PROOF
 	sewrepair = FALSE
@@ -505,7 +506,19 @@
 	desc = "A steel helmet which protects the whole of the head."
 	icon_state = "kettle"
 	body_parts_covered = HEAD|HAIR|EARS
+	flags_inv = HIDEEARS
+	body_parts_covered = HEAD|HAIR
 
+//................ CULTIST HOOD ............... //
+/obj/item/clothing/head/roguetown/helmet/leather/cult_hood
+	name = "cultist hood"
+	desc = "It echoes with ominous laughter."
+	icon_state = "warlockhood"
+	dynamic_hair_suffix = ""
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	body_parts_covered = NECK|HAIR|EARS|HEAD
+
+//................ Sallet ............... //
 /obj/item/clothing/head/roguetown/helmet/sallet
 	name = "sallet"
 	icon_state = "sallet"
@@ -521,6 +534,7 @@
 	adjustable = CAN_CADJUST
 	flags_inv = HIDEFACE
 	flags_cover = HEADCOVERSEYES
+	armor_class = ARMOR_CLASS_MEDIUM
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES
 	block2add = FOV_BEHIND
 
@@ -545,9 +559,9 @@
 					var/mob/living/carbon/H = user
 					H.update_inv_head()
 		user.update_fov_angles()
-		
+
 /obj/item/clothing/head/roguetown/helmet/astratahelm
-	name = "astrata helmet"
+	name = "astratan helmet"
 	desc = "Headwear commonly worn by Templars in service to Astrata. The firstborn child's light will forever shine on within its crest."
 	icon_state = "astratahelm"
 	item_state = "astratahelm"
@@ -555,10 +569,25 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
+	armor_class = ARMOR_CLASS_MEDIUM
 	block2add = FOV_BEHIND
 
+/obj/item/clothing/head/roguetown/helmet/astratahelm/alt
+	desc = "Gilded gold and silvered metal, the bright, vibrant colors of an Astratan crusader radiate from this blessed helmet."
+	icon_state = "astratahelm_alt"
+	item_state = "astratahelm_alt"
+
+/obj/item/clothing/head/roguetown/helmet/heavy/malumhelm
+	name = "malummite helmet"
+	desc = "Forged in a coal-black, this helmet carries a sigiled blade upon it's visor, ever reminding it's wearer of Malum's powerful gaze."
+	icon_state = "malumhelm"
+	item_state = "malumhelm"
+	emote_environment = 3
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	block2add = FOV_RIGHT|FOV_LEFT
+
 /obj/item/clothing/head/roguetown/helmet/nochelm
-	name = "noc helmet"
+	name = "noctian helmet"
 	desc = "Hearwear commonly worn by Templars in service to Noc. Without the night there can be no day, without Noc there can be no light in the dark hours."
 	icon_state = "nochelm"
 	item_state = "nochelm"
@@ -566,10 +595,11 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
+	armor_class = ARMOR_CLASS_MEDIUM
 	block2add = FOV_BEHIND
 
 /obj/item/clothing/head/roguetown/helmet/necrahelm
-	name = "necra helmet"
+	name = "necran helmet"
 	desc = "Headwear commonly worn by Templars in service to Necra. Let its skeletal features remind you of the only thing which is guaranteed in life. You will die."
 	icon_state = "necrahelm"
 	item_state = "necrahelm"
@@ -577,10 +607,16 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
+	armor_class = ARMOR_CLASS_MEDIUM
 	block2add = FOV_BEHIND
 
+/obj/item/clothing/head/roguetown/helmet/necrahelm/alt
+	desc = "The darkest of blacks, this hooded helm is reminiscent of an executioner's head, striking fear into those who look upon it that they too may soon face the undermaiden."
+	icon_state = "necrahelm_alt"
+	item_state = "necrahelm_alt"
+
 /obj/item/clothing/head/roguetown/helmet/dendorhelm
-	name = "dendor helmet"
+	name = "dendorite helmet"
 	desc = "Headwear commonly worn by Templars in service to Dendor. Its protrusions almost resemble branches. Take root in the earth, and you will never be moved."
 	icon_state = "dendorhelm"
 	item_state = "dendorhelm"
@@ -588,6 +624,7 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
+	armor_class = ARMOR_CLASS_MEDIUM
 	block2add = FOV_BEHIND
 
 /obj/item/clothing/head/roguetown/helmet/heavy
@@ -601,6 +638,7 @@
 	armor = list("blunt" = 90, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST)
 	block2add = FOV_RIGHT|FOV_LEFT
+	armor_class = ARMOR_CLASS_HEAVY
 	max_integrity = 400
 
 /obj/item/clothing/head/roguetown/helmet/heavy/guard
@@ -612,14 +650,15 @@
 	block2add = FOV_RIGHT|FOV_LEFT
 	smeltresult = /obj/item/ingot/iron
 
-/obj/item/clothing/head/roguetown/helmet/heavy/sheriff
+/obj/item/clothing/head/roguetown/helmet/heavy/gate
 	name = "barred helmet"
-	desc = "A helmet which offers good protection to the face at the expense of vision."
+	desc = "A helmet which offers good protection to the face. The bars resemble the gates of the manor, closed and protecting the gatemaster's identity."
 	icon_state = "gatehelm"
 	emote_environment = 3
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
-	block2add = FOV_RIGHT|FOV_LEFT
-	smeltresult = /obj/item/ingot/iron
+	block2add = FOV_BEHIND
+	armor_class = ARMOR_CLASS_MEDIUM	//breaks the 'scheme' of armor class, because it's a unqiue helm, that can't be remade. Go forth, gatemaster.
+	smeltresult = /obj/item/ingot/steel
 
 /obj/item/clothing/head/roguetown/helmet/heavy/knight
 	name = "knight's helmet"
@@ -748,6 +787,7 @@
 	item_state = "volfplate"
 	adjustable = CAN_CADJUST
 	emote_environment = 3
+	armor_class = ARMOR_CLASS_MEDIUM
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	block2add = FOV_BEHIND
@@ -783,6 +823,7 @@
 	emote_environment = 3
 	body_parts_covered = HEAD|HAIR|EARS
 	flags_inv = HIDEHAIR
+	armor_class = ARMOR_CLASS_MEDIUM
 	block2add = FOV_BEHIND
 
 /obj/item/clothing/head/roguetown/helmet/leather
@@ -797,6 +838,7 @@
 	smeltresult = null
 	blocksound = SOFTHIT
 	clothing_flags = null
+	sewrepair = TRUE
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide
 
@@ -821,6 +863,34 @@
 	dynamic_hair_suffix = "+generic"
 	worn_x_dimension = 64
 	worn_y_dimension = 64
+
+	/// This var basicly counts the numbers of times this hat has changes its appearence
+	var/hat_count = 0
+
+/obj/item/clothing/head/roguetown/wizhat/MiddleClick(mob/user, params)
+	. = ..()
+	if(!do_after(user, 20, target = user))
+		return
+	if(hat_count == 0)
+		icon_state = "wizardhatred"
+		hat_count += 1
+	else if(hat_count == 1)
+		icon_state = "wizardhatyellow"
+		hat_count += 1
+	else if(hat_count == 2)
+		icon_state = "wizardhatgreen"
+		hat_count += 1
+	else if(hat_count == 3)
+		icon_state = "wizardhatblack"
+		hat_count += 1
+	else if(hat_count == 4)
+		icon_state = "wizardhatgen"
+		hat_count += 1
+	else if(hat_count == 5)
+		icon_state = "wizardhat"
+		hat_count = 0
+	to_chat(user, span_info("The wizard hat magically changes it's colours!"))
+	playsound(src, 'sound/magic/swap.ogg', 50, TRUE)
 
 /obj/item/clothing/head/roguetown/wizhat/red
 	icon_state = "wizardhatred"

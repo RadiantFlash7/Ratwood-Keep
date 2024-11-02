@@ -13,6 +13,10 @@
 	content_overlays = FALSE
 	bloody_icon_state = "bodyblood"
 	var/heldz_items = 3
+	sewrepair = TRUE
+	fiber_salvage = TRUE
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/hide
 
 /obj/item/storage/belt/rogue/ComponentInitialize()
 	. = ..()
@@ -36,7 +40,6 @@
 	item_state = "leather"
 	equip_sound = 'sound/blank.ogg'
 	heldz_items = 3
-	sewrepair = TRUE
 
 /obj/item/storage/belt/rogue/leather/dropped(mob/living/carbon/human/user)
 	..()
@@ -95,12 +98,14 @@
 	item_state = "rope"
 	color = "#b9a286"
 	heldz_items = 1
+	salvage_result = /obj/item/rope
 
 /obj/item/storage/belt/rogue/leather/cloth
 	name = "cloth sash"
 	desc = "A simple cloth sash."
 	icon_state = "cloth"
 	heldz_items = 1
+	salvage_result = /obj/item/natural/cloth
 
 /obj/item/storage/belt/rogue/leather/cloth/lady
 	color = "#575160"
@@ -124,7 +129,7 @@
 	equip_sound = 'sound/blank.ogg'
 	content_overlays = FALSE
 	bloody_icon_state = "bodyblood"
-	sewrepair = TRUE
+	fiber_salvage = FALSE
 
 /obj/item/storage/belt/rogue/pouch/ComponentInitialize()
 	. = ..()
@@ -175,7 +180,22 @@
 				qdel(H)
 
 /obj/item/storage/belt/rogue/pouch/food/PopulateContents()
-	new /obj/item/reagent_containers/food/snacks/rogue/crackerscooked(src)
+	new /obj/item/reagent_containers/food/snacks/rogue/foodbase/hardtack_raw/cooked(src)
+
+/obj/item/storage/belt/rogue/pouch/ammo
+	name = "rune ball pouch"
+	desc = "Usually used for holding runelock balls."
+
+/obj/item/storage/belt/rogue/pouch/ammo/PopulateContents()
+	new /obj/item/ammo_casing/caseless/rogue/bullet(src)
+	new /obj/item/ammo_casing/caseless/rogue/bullet(src)
+	new /obj/item/ammo_casing/caseless/rogue/bullet(src)
+
+/obj/item/storage/backpack/rogue //holding salvage vars for children
+	sewrepair = TRUE
+	fiber_salvage = TRUE
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/hide
 
 /obj/item/storage/backpack/rogue/satchel
 	name = "satchel"
@@ -192,7 +212,6 @@
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
 	alternate_worn_layer = UNDER_CLOAK_LAYER
-	sewrepair = TRUE
 
 /obj/item/storage/backpack/rogue/satchel/heartfelt/PopulateContents()
 	new /obj/item/natural/feather(src)
@@ -201,7 +220,7 @@
 /obj/item/storage/backpack/rogue/satchel/mule/PopulateContents()
 	for(var/i in 1 to 3)
 		switch(rand(1,4))
-			if(1)	
+			if(1)
 				new /obj/item/reagent_containers/powder/moondust_purest(src)
 			if(2)
 				new /obj/item/reagent_containers/powder/moondust_purest(src)
@@ -241,7 +260,6 @@
 	max_integrity = 300
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
-	sewrepair = TRUE
 
 /obj/item/storage/backpack/rogue/backpack/ComponentInitialize()
 	. = ..()
@@ -251,7 +269,7 @@
 		STR.max_w_class = WEIGHT_CLASS_NORMAL
 		STR.max_items = 14
 		STR.not_while_equipped = TRUE
-
+/*
 /obj/item/storage/belt/rogue/pickles
 	name = "jar of pickles"
 	desc = "Briney goodness!"
@@ -262,6 +280,7 @@
 	max_integrity = 100
 	content_overlays = FALSE
 	heldz_items = 4
+	sewrepair = FALSE
 
 /obj/item/storage/belt/rogue/pickles/ComponentInitialize()
 	. = ..()
@@ -277,3 +296,5 @@
 	new /obj/item/reagent_containers/food/snacks/grown/pickle(src)
 	new /obj/item/reagent_containers/food/snacks/grown/pickle(src)
 	new /obj/item/reagent_containers/food/snacks/grown/pickle(src)
+
+*/

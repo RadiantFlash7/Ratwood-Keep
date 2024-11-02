@@ -85,11 +85,11 @@
 	icon = 'icons/roguetown/misc/tallstructure.dmi'
 	icon_state = "slamp1"
 	base_state = "slamp"
-	brightness = 10
+	brightness = 10.9
 	nightshift_allowed = FALSE
 	fueluse = 0
-	bulb_colour = "#f9e080"
-	bulb_power = 0.85
+	bulb_colour = "#58dd90"
+	bulb_power = 0.95
 	max_integrity = 0
 	use_power = NO_POWER_USE
 	var/datum/looping_sound/soundloop
@@ -729,6 +729,12 @@
 						sleep(600)
 						playsound(src, "bubbles", 30, TRUE)
 						pot.reagents.add_reagent(/datum/reagent/consumable/soup/veggie/onion, 65)
+						pot.reagents.remove_reagent(/datum/reagent/water, 1)
+					if(istype(W, /obj/item/reagent_containers/food/snacks/grown/beet))
+						qdel(W)
+						sleep(600)
+						playsound(src, "bubbles", 30, TRUE)
+						pot.reagents.add_reagent(/datum/reagent/consumable/soup/veggie/beet, 65)
 						pot.reagents.remove_reagent(/datum/reagent/water, 1)
 					if(istype(W, /obj/item/reagent_containers/food/snacks/rogue/veg/cabbage_sliced))
 						qdel(W)

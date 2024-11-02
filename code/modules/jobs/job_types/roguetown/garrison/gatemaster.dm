@@ -5,7 +5,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	allowed_sexes = list(MALE)
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_TOLERATED_UP
 	allowed_patrons = ALL_NON_INHUMEN_PATRONS
 	tutorial = "Tales speak of the Gatemaster's legendary ability to stand still at a gate and ask people questions. \
@@ -39,7 +39,7 @@
 
 /datum/outfit/job/roguetown/gatemaster/pre_equip(mob/living/carbon/human/H)
 	..()
-	head = /obj/item/clothing/head/roguetown/roguehood/red
+	head = /obj/item/clothing/head/roguetown/helmet/heavy/gate
 	neck = /obj/item/clothing/neck/roguetown/gorget
 	cloak = /obj/item/clothing/cloak/stabard/surcoat/guard
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail
