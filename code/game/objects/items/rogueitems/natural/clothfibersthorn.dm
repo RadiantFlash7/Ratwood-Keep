@@ -185,7 +185,7 @@
 		return
 	var/used_time = 70
 	if(H.mind)
-		used_time -= (H.mind.get_skill_level(/datum/skill/misc/medicine) * 10)
+		used_time -= (H.mind.get_skill_level(/datum/skill/misc/treatment) * 10)
 	playsound(loc, 'sound/foley/bandage.ogg', 100, FALSE)
 	if(!do_mob(user, M, used_time))
 		return
@@ -227,6 +227,8 @@
 		if(prob(prob2break))
 			playsound(src,'sound/items/seedextract.ogg', 100, FALSE)
 			qdel(src)
+			if (L.alpha == 0 && L.rogue_sneaking) // not anymore you're not
+				L.update_sneak_invis(TRUE)
 			L.consider_ambush()
 
 /obj/item/natural/bundle/fibers

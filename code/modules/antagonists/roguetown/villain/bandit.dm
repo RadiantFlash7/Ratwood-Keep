@@ -5,12 +5,12 @@
 	job_rank = ROLE_BANDIT
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "bandit"
+	rogue_enabled = TRUE
 	confess_lines = list(
 		"FREEDOM!!!",
 		"I WILL NOT LIVE IN YOUR WALLS!",
 		"I WILL NOT FOLLOW YOUR RULES!",
 	)
-	rogue_enabled = TRUE
 	var/tri_amt
 	var/contrib
 
@@ -34,9 +34,7 @@
 	for(var/obj/structure/fluff/traveltile/bandit/tile in GLOB.traveltiles)
 		tile.show_travel_tile(H)
 	ADD_TRAIT(H, TRAIT_SEEPRICES, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_COMMIE, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_TOLERANT, TRAIT_GENERIC)
 	H.set_patron(/datum/patron/inhumen/matthios)
 	to_chat(H, span_alertsyndie("I am a BANDIT!"))
 	to_chat(H, span_boldwarning("Long ago I did a crime worthy of my bounty being hung on the wall outside of the local inn. I live now with fellow free men in reverence to MATTHIOS whose idol grants us boons and wishes when fed the money, treasures, and metals of the civilized wretches. I must feed the idol to satisfy my greed!"))
@@ -108,4 +106,3 @@
 		to_chat(owner.current, span_redtext("I've failed to satisfy my greed."))
 		if(owner.current)
 			owner.current.playsound_local(get_turf(owner.current), 'sound/misc/fail.ogg', 100, FALSE, pressure_affected = FALSE)
-
