@@ -11,10 +11,10 @@
 	twohands_required = TRUE
 	gripped_intents = list(/datum/intent/hit)
 	possible_item_intents = list(/datum/intent/hit)
-	obj_flags = CAN_BE_HIT
 	w_class = WEIGHT_CLASS_HUGE
 	var/lumber = /obj/item/grown/log/tree/small //These are solely for lumberjack calculations
 	var/lumber_amount = 2
+	metalizer_result = /obj/item/rogueore/iron
 
 /obj/item/grown/log/tree/attacked_by(obj/item/I, mob/living/user) //This serves to reward woodcutting
 	if(user.used_intent.blade_class == BCLASS_CHOP && lumber_amount)
@@ -25,12 +25,12 @@
 		if(!do_after(user, lumber_time, target = user))
 			return
 		lumber_amount = rand(minimum, max(round(skill_level), minimum))
-		var/essense_sound_played = FALSE //This is here so the sound wont play multiple times if the essense itself spawns multiple times
+		var/essence_sound_played = FALSE //This is here so the sound wont play multiple times if the essence itself spawns multiple times
 		for(var/i = 0; i < lumber_amount; i++)
-			if(prob(skill_level+ user.goodluck(2)))
+			if(prob(skill_level + user.goodluck(2)))
 				new /obj/item/grown/log/tree/small/essence(get_turf(src))
-				if(!essense_sound_played)
-					essense_sound_played = TRUE
+				if(!essence_sound_played)
+					essence_sound_played = TRUE
 					to_chat(user, span_warning("Dendor watches over us..."))
 					playsound(src,pick('sound/items/gem.ogg'), 100, FALSE)
 			else
@@ -55,6 +55,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	smeltresult = /obj/item/rogueore/coal
 	lumber_amount = 0
+	metalizer_result = /obj/item/rogueore/copper
 
 /obj/item/natural/wood/plank
 	name = "wood plank"
@@ -64,6 +65,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	smeltresult = /obj/item/ash
 	bundletype = /obj/item/natural/bundle/plank
+	metalizer_result = /obj/item/rogueore/tin
 
 
 /obj/item/natural/bundle/plank
@@ -74,7 +76,6 @@
 	force = 0
 	throwforce = 0
 	maxamount = 10
-	obj_flags = null
 	firefuel = 30 MINUTES
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_BULKY
@@ -89,11 +90,12 @@
 
 /obj/item/grown/log/tree/small/essence
 	name = "essence of lumber"
-	desc = "A mystical essense embued with the power of Dendor. Very good source of fuel."
+	desc = "A mystical essence embued with the power of Dendor. Very good source of fuel."
 	icon_state = "lessence"
 	static_debris = null
 	firefuel = 60 MINUTES // Extremely poweful fuel.
 	w_class = WEIGHT_CLASS_SMALL
+	metalizer_result = /obj/item/rogueore/gold
 
 /obj/item/grown/log/tree/bowpartial
 	name = "unstrung bow"
@@ -106,6 +108,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	smeltresult = /obj/item/rogueore/coal
 	lumber_amount = 0
+	metalizer_result = null
 
 /obj/item/grown/log/tree/stick
 	name = "stick"
@@ -115,12 +118,12 @@
 	max_integrity = 20
 	static_debris = null
 	firefuel = 5 MINUTES
-	obj_flags = null
 	w_class = WEIGHT_CLASS_NORMAL
 	twohands_required = FALSE
 	gripped_intents = null
 	slot_flags = ITEM_SLOT_MOUTH|ITEM_SLOT_HIP
 	lumber_amount = 0
+	metalizer_result = /obj/item/needle
 
 /obj/item/grown/log/tree/stick/Crossed(mob/living/L)
 	. = ..()
@@ -187,9 +190,9 @@
 	blade_dulling = 0
 	max_integrity = 20
 	static_debris = null
-	obj_flags = null
 	w_class = WEIGHT_CLASS_SMALL
 	twohands_required = FALSE
 	gripped_intents = null
 	slot_flags = ITEM_SLOT_MOUTH|ITEM_SLOT_HIP
 	lumber_amount = 0
+	metalizer_result = /obj/item/ammo_casing/caseless/rogue/arrow/iron

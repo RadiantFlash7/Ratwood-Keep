@@ -38,8 +38,6 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	var/check_for_lord = TRUE
 	var/next_check_lord = 0
 	var/missing_lord_time = FALSE
-	var/roundvoteend = FALSE
-	var/ttime
 
 	var/kingsubmit = FALSE
 	var/deathknightspawn = FALSE
@@ -51,7 +49,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	skeletons = FALSE
 
 /datum/game_mode/chaosmode/check_finished()
-	ttime = world.time - SSticker.round_start_time
+	var/ttime = world.time - SSticker.round_start_time
 	if(roguefight)
 		if(ttime >= 30 MINUTES)
 			return TRUE
@@ -64,7 +62,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 
 	if(ttime >= GLOB.round_timer)
 		if(roundvoteend)
-			if(ttime >= (GLOB.round_timer + ROUND_END_TIME) )
+			if(ttime >= round_ends_at)
 				for(var/mob/living/carbon/human/H in GLOB.human_list)
 					if(H.stat != DEAD)
 						if(H.allmig_reward)
@@ -201,10 +199,15 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	//BANDITS
 	banditgoal = rand(200,400)
 	restricted_jobs = list("Duke",
-	"Duchess Consort",
+	"Duchess",
 	"Merchant",
 	"Priest",
-	"Knight")
+	"Knight",
+	"Goblin Chief",
+	"Goblin Cook",
+	"Goblin Guard",
+	"Goblin Rabble",
+	"Goblin Smith")
 	var/num_bandits = 0
 	if(num_players() >= 12)
 		// 1 bandit per 12 players,
@@ -342,7 +345,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_maniac()
-	restricted_jobs = list("Duke", "Duchess Consort")
+	restricted_jobs = list("Duke", "Duchess")
 	antag_candidates = get_players_for_role(ROLE_MANIAC)
 	var/datum/mind/villain = pick_n_take(antag_candidates)
 	if(villain)
@@ -364,16 +367,21 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 /datum/game_mode/chaosmode/proc/pick_cultist()
 	var/remaining = 3 // 1 heresiarch, 2 cultists
 	restricted_jobs = list("Duke",
-	"Duchess Consort",
+	"Duchess",
 	"Priest",
 	"Bandit",
 	"Knight",
 	"Retinue Captain",
 	"Gatemaster",
-	"Bog Master",
+	"Warden",
 	"Inquisitor",
 	"Confessor",
-	"Acolyte"
+	"Acolyte",
+	"Goblin Chief",
+	"Goblin Cook",
+	"Goblin Guard",
+	"Goblin Rabble",
+	"Goblin Smith"
 	)
 	antag_candidates = get_players_for_role(ROLE_ZIZOIDCULTIST)
 	antag_candidates = shuffle(antag_candidates)
@@ -407,7 +415,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 
 	restricted_jobs = list(
 	"Duke",
-	"Duchess Consort",
+	"Duchess",
 	"Dungeoneer",
 	"Inquisitor",
 	"Confessor",
@@ -417,13 +425,18 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	"Acolyte",
 	"Cleric",
 	"Retinue Captain",
-	"Court Magician",
+	"Court Magos",
 	"Templar",
-	"Bog Guard",
-	"Bog Master",
+	"Vanguard",
+	"Warden",
 	"Knight",
 	"Mortician",
-	"Mercenary"
+	"Mercenary",
+	"Goblin Chief",
+	"Goblin Cook",
+	"Goblin Guard",
+	"Goblin Rabble",
+	"Goblin Smith"
 	)
 	antag_candidates = get_players_for_role(ROLE_LICH)
 	var/datum/mind/lichman = pick_n_take(antag_candidates)
@@ -447,7 +460,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	var/vampsremaining = 3
 	restricted_jobs = list(
 	"Duke",
-	"Duchess Consort",
+	"Duchess",
 	"Dungeoneer",
 	"Inquisitor",
 	"Confessor",
@@ -457,12 +470,17 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	"Acolyte",
 	"Cleric",
 	"Retinue Captain",
-	"Court Magician",
+	"Court Magos",
 	"Templar",
-	"Bog Guard",
-	"Bog Master",
+	"Vanguard",
+	"Warden",
 	"Knight",
-	"Bandit"
+	"Bandit",
+	"Goblin Chief",
+	"Goblin Cook",
+	"Goblin Guard",
+	"Goblin Rabble",
+	"Goblin Smith"
 	)
 	antag_candidates = get_players_for_role(ROLE_NBEAST)
 	antag_candidates = shuffle(antag_candidates)
@@ -495,7 +513,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	// Ideally we want adventurers/pilgrims/towners to roll it
 	restricted_jobs = list(
 	"Duke",
-	"Duchess Consort",
+	"Duchess",
 	"Dungeoneer",
 	"Inquisitor",
 	"Confessor",
@@ -505,14 +523,19 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	"Acolyte",
 	"Cleric",
 	"Retinue Captain",
-	"Court Magician",
+	"Court Magos",
 	"Templar",
-	"Bog Guard",
-	"Bog Master",
+	"Vanguard",
+	"Warden",
 	"Knight",
 	"Mortician",
 	"Mercenary",
-	"Bandit"
+	"Bandit",
+	"Goblin Chief",
+	"Goblin Cook",
+	"Goblin Guard",
+	"Goblin Rabble",
+	"Goblin Smith"
 	)
 
 	var/num_werewolves = rand(1,2)

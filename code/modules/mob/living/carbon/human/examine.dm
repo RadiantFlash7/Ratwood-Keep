@@ -128,13 +128,8 @@
 			. += "<span class='userdanger'>OUTLAW!</span>"
 		if(mind && mind.special_role)
 		else
-			if(mind && mind.special_role == "Bandit")
-				. += "<span class='userdanger'>BANDIT!</span>"
 			if(mind && mind.special_role == "Vampire Lord")
 				. += "<span class='userdanger'>A MONSTER!</span>"
-
-		if(name in GLOB.outlawed_players)
-			. += span_userdanger("OUTLAW!")
 
 
 		var/commie_text
@@ -261,8 +256,8 @@
 	if(!(SLOT_GLASSES in obscured))
 		if(glasses)
 			. += "[m3] [glasses.get_examine_string(user)] covering [m2] eyes."
-		else if(eye_color == BLOODCULT_EYE && iscultist(src) && HAS_TRAIT(src, CULT_EYES))
-			. += span_warning("<B>[m2] eyes are glowing an unnatural red!</B>")
+		else if(eye_color == BLOODCULT_EYE)
+			. += "<span class='warning'><B>[m2] eyes are glowing an unnatural red!</B></span>"
 
 	//ears
 	if(ears && !(SLOT_HEAD in obscured))

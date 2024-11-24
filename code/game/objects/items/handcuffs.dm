@@ -94,10 +94,7 @@
 
 			playsound(loc, cuffsound, 30, TRUE, -2)
 			if(do_mob(user, C, 30) && (C.get_num_arms(FALSE) >= 2 || C.get_arm_ignore()))
-				if(iscyborg(user))
-					apply_cuffs(C, user, TRUE)
-				else
-					apply_cuffs(C, user)
+				apply_cuffs(C, user)
 				C.visible_message(span_notice("[user] handcuffs [C]."), \
 									span_danger("[user] handcuffs you."))
 				SSblackbox.record_feedback("tally", "handcuffs", 1, type)
@@ -286,7 +283,7 @@
 		else
 			var/used_time = 10 SECONDS
 			if(C.mind)
-				used_time -= max((C.mind.get_skill_level(/datum/skill/craft/traps) * 2 SECONDS), 2 SECONDS)
+				used_time -= max((C.mind.get_skill_level(/datum/skill/craft/hunting) * 2 SECONDS), 2 SECONDS)
 			if(do_after(user, used_time, target = src))
 				armed = FALSE
 				w_class = WEIGHT_CLASS_NORMAL

@@ -9,8 +9,8 @@
 	w_class = WEIGHT_CLASS_TINY
 	dropshrink = 0.75
 	throwforce = 0
-	var/lockhash = 0
-	var/lockid = null
+	lockhash = 0
+	lockid = null
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH|ITEM_SLOT_NECK
 	anvilrepair = /datum/skill/craft/blacksmithing
 
@@ -36,7 +36,7 @@
 
 	if(!istype(I, /obj/item/rogueweapon/hammer))
 		return
-	
+
 	var/input = (input(user, "What would you name this key?", "", "") as text)
 
 	if(!input)
@@ -53,12 +53,12 @@
 	icon_state = "brownkey"
 	w_class = WEIGHT_CLASS_TINY
 	dropshrink = 0.75
-	var/lockhash = 0
+	lockhash = 0
 
 /obj/item/key_custom_blank/attackby(obj/item/I, mob/user, params)
 
 	if(!istype(I, /obj/item/rogueweapon/hammer))
-		return 
+		return
 
 	var/input = input(user, "What would you like to set the key ID to?", "", 0) as num
 
@@ -214,6 +214,24 @@
 	desc = "The key to the sixth room."
 	icon_state = "brownkey"
 	lockid = "roomvi"
+
+/obj/item/key/fancyroomi
+	name = "fancy room I key"
+	desc = "The key to the fancy room I."
+	icon_state = "brownkey"
+	lockid = "fancyroomi"
+
+/obj/item/key/fancyroomii
+	name = "fancy room II key"
+	desc = "The key to the fancy room II."
+	icon_state = "brownkey"
+	lockid = "fancyroomii"
+
+/obj/item/key/fancyroomiii
+	name = "fancy room III key"
+	desc = "The key to the fancy room III."
+	icon_state = "brownkey"
+	lockid = "fancyroomiii"
 
 /obj/item/key/roomhunt
 	name = "room HUNT key"
@@ -371,23 +389,11 @@
 	icon_state = "spikekey"
 	lockid = "bog_gatehouse"
 
-/obj/item/key/bog_barracks
-	name = "bog barracks key"
-	desc = "This key opens the bog barracks."
+/obj/item/key/bog_master
+	name = "Warden's key"
+	desc = "This key opens the Warden's office."
 	icon_state = "spikekey"
-	lockid = "bog_barracks"
-
-/obj/item/key/bog_dungeon
-	name = "bog dungeon key"
-	desc = "This key opens the bog dungeon."
-	icon_state = "spikekey"
-	lockid = "bog_dungeon"
-
-/obj/item/key/bog_armory
-	name = "bog armory key"
-	desc = "This key opens the bog armory."
-	icon_state = "spikekey"
-	lockid = "bog_armory"
+	lockid = "bog_master"
 
 /obj/item/key/town_barracks
 	name = "town barracks key"
@@ -442,6 +448,32 @@
 	desc = "This key opens the keep armory."
 	icon_state = "spikekey"
 	lockid = "keep_armory"
+
+//grenchensnacker
+/obj/item/key/porta
+	name = "strange key"
+	desc = "Was this key enchanted by a wizard locksmith...?"//what is grenchensnacker.
+	icon_state = "eyekey"
+	lockid = "porta"
+
+//Goblins
+/obj/item/key/goblin
+	name = "goblin key"
+	desc = "This key opens the fort's basic interior doors."
+	icon_state = "mazekey"
+	lockid = "gobbo"
+
+/obj/item/key/goblinguard
+	name = "goblin guard key"
+	desc = "This key opens the fort barracks."
+	icon_state = "spikekey"
+	lockid = "gobbo_guards"
+
+/obj/item/key/goblinchief
+	name = "goblin chief key"
+	desc = "This key opens the Chief's room and the vault."
+	icon_state = "spikekey"
+	lockid = "gobbo_chief"
 
 //grenchensnacker
 /obj/item/key/porta

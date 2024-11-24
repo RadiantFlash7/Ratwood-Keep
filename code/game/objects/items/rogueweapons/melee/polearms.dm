@@ -53,6 +53,7 @@
 	bigboy = TRUE
 	gripsprite = TRUE
 	associated_skill = /datum/skill/combat/polearms
+	metalizer_result = /obj/item/rogueweapon/spear/bronze
 
 /obj/item/rogueweapon/woodstaff/getonmobprop(tag)
 	. = ..()
@@ -289,6 +290,7 @@
 	smeltresult = /obj/item/ingot/bronze
 	force = 20
 	force_wielded = 25
+	gripsprite = FALSE //someone really should make a grip sprite
 
 /obj/item/rogueweapon/greatsword
 	force = 12

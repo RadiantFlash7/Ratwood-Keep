@@ -101,7 +101,6 @@
 	icon_state = "trou"
 	item_state = "trou"
 	max_integrity = 100
-//	adjustable = CAN_CADJUST
 	sewrepair = TRUE
 	armor = list("blunt" = 33, "slash" = 12, "stab" = 22, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT)
@@ -109,22 +108,8 @@
 	blade_dulling = DULLING_BASHCHOP
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
-
-/obj/item/clothing/under/roguetown/trou/leather
-	name = "leather trousers"
-	desc = "Trousers made of fine leather."
-	icon_state = "leathertrou"
-	max_integrity = 130
-	armor = list("blunt" = 50, "slash" = 25, "stab" = 40, "bullet" = 10, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_STAB)
 	salvage_amount = 1
-	salvage_result = /obj/item/natural/hide
-
-/obj/item/clothing/under/roguetown/trou/leather/mourning
-	name = "mourning trousers"
-	desc = "Dark trousers worn by morticians while performing burial rites."
-	icon_state = "leathertrou"
-	color = "#151615"
+	salvage_result = /obj/item/natural/hide/cured
 
 /obj/item/clothing/under/roguetown/chainlegs
 	name = "chain chausses"
