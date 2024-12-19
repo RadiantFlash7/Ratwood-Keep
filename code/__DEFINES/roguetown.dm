@@ -173,6 +173,7 @@
 	/datum/patron/divine/pestra,\
 	/datum/patron/divine/malum,\
 	/datum/patron/divine/ravox,\
+	/datum/patron/divine/eora,\
 )
 
 #define ALL_ACOLYTE_PATRONS list(\
@@ -180,7 +181,8 @@
 	/datum/patron/divine/noc,\
 	/datum/patron/divine/dendor,\
 	/datum/patron/divine/pestra,\
-	/datum/patron/divine/malum\
+	/datum/patron/divine/malum,\
+	/datum/patron/divine/eora,\
 )
 
 #define ALL_DIVINE_PATRONS list(\
@@ -285,8 +287,9 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_BANDIT			"CAT_BANDIT"		// Bandit class - Tied to the bandit antag really
 #define CTAG_CHALLENGE 		"CAT_CHALLENGE"  	// Challenge class - Meant to be free for everyone
 #define CTAG_MERCENARY 		"CAT_MERCENARY" 	// Mercs
-#define CTAG_BOG 		"CAT_BOG" 	//Vanguard
-#define CTAG_GOBS 		"CAT_GOBS" 	// Goblin Guards
+#define CTAG_BOG 			"CAT_BOG"			//Vanguard
+#define CTAG_GOBS 			"CAT_GOBS"			// Goblin Guards
+#define CTAG_HENCH	 		"CAT_HENCH"			// Whitevein Guards
 
 /*
 	Defines for the triumph buy datum categories

@@ -114,6 +114,8 @@
 #define BOGGUARD	(1<<4)
 #define BOGMASTER	(1<<5)
 #define SHERIFF		(1<<6)
+#define HARBORMASTER	(1<<7)
+#define LONGSHOREMAN	(1<<8)
 
 #define CHURCHMEN		(1<<2)
 
@@ -144,6 +146,7 @@
 #define SCRIBE		(1<<7)
 #define ELDER		(1<<8)
 #define APOTHECARY	(1<<9)
+#define ARCHITECT	(1<<10)
 
 #define PEASANTS	(1<<5)
 
@@ -252,7 +255,6 @@
 
 #define JDO_MERCHANT 17
 #define JDO_SHOPHAND 17.1
-#define JDO_GRABBER 17.2
 
 #define JDO_ARCHIVIST 18
 
@@ -260,7 +262,8 @@
 #define JDO_GUILDSMITH 20
 #define JDO_APPRENTICE 21
 
-#define JDO_ARTIFICER 22
+#define JDO_ARCHITECT 22
+#define JDO_ARTIFICER 22.1
 
 #define JDO_SEAMSTER 23
 
@@ -271,7 +274,12 @@
 #define JDO_SOILSON 27.2
 
 #define JDO_NIGHTMASTER 28
-#define JDO_WENCH 28.1
+#define JDO_GRABBER 28.1
+#define JDO_WENCH 28.2
+
+
+#define JDO_HARBORMASTER 29
+#define JDO_LONGSHOREMAN 29.1
 
 #define JDO_VILLAGER 30
 #define JDO_ADVENTURER 30.1
@@ -354,6 +362,7 @@
 #define YEOMEN_ROLES \
 	/datum/job/roguetown/woodsman,\
 	/datum/job/roguetown/archivist,\
+	/datum/job/roguetown/architect,\
 	/datum/job/roguetown/barkeep,\
 	/datum/job/roguetown/guildsmith,\
 	/datum/job/roguetown/artificer,\
@@ -367,6 +376,7 @@
 	/datum/job/roguetown/guild_clerk,\
 	/datum/job/roguetown/mercenary,\
 	/datum/job/roguetown/seelie,\
+	/datum/job/roguetown/grabber,\
 	/datum/job/roguetown/bandit
 
 #define GARRISON_ROLES \
