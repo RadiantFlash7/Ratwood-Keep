@@ -138,6 +138,7 @@
 
 /obj/item/clothing/neck/roguetown/gorget/steel
 	name ="steel gorget"
+	desc = "A steel gorget to protect the neck."
 	smeltresult = /obj/item/ingot/steel
 	max_integrity = 300
 	icon_state = "sgorget"
@@ -183,6 +184,11 @@
 /obj/item/clothing/neck/roguetown/psicross/astrata
 	name = "amulet of Astrata"
 	desc = ""
+	icon_state = "astrata"
+
+/obj/item/clothing/neck/roguetown/psicross/silver/astrata
+	name = "imbued amulet of Astrata"
+	desc = "Similar to a normal amulet of Astrata. This one is blessed and made of silver."
 	icon_state = "astrata"
 
 /obj/item/clothing/neck/roguetown/psicross/noc
