@@ -185,7 +185,7 @@ s
 	. = ..()
 	if(.)
 		return
-	if(last_process + time_between_uses > world.time)
+	if(last_process + time_between_uses < world.time)
 		to_chat(user, span_notice("The leyline appears to be drained of energy."))
 		return
 	if(!isarcyne(user))

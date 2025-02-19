@@ -241,8 +241,27 @@ GLOBAL_LIST(teleport_runes)
 					invokers += invoker
 			if(invoker == user)
 				continue
-
+	var/structures_in_way = check_for_structures_and_closed_turfs(loc, src)	//Alas, no gamer killzones ontop of Runes for you.
+	if(structures_in_way == TRUE)
+		to_chat(user, span_cult("There is a structure, rune or wall interrupting your invocation!"))
+		rune_in_use = FALSE
+		return
 	return invokers
+
+/obj/effect/decal/cleanable/roguerune/proc/check_for_structures_and_closed_turfs(loc, var/obj/effect/decal/cleanable/roguerune/rune_to_scribe)
+	for(var/turf/T in range(loc, rune_to_scribe.runesize))
+		//check for /sturcture subtypes in the turf's contents
+		for(var/obj/structure/S in T.contents)
+			return TRUE		//Found a structure, no need to continue
+
+		//check if turf itself is a /turf/closed subtype
+		if(istype(T,/turf/closed))
+			return TRUE
+		//check if rune in the turfs contents
+		for(var/obj/effect/decal/cleanable/roguerune/R in T.contents)
+			return TRUE
+		//Return false if nothing in range was found
+	return FALSE
 
 /obj/effect/decal/cleanable/roguerune/proc/invoke(list/invokers, datum/runerituals/runeritual)		//Generic invoke proc. This will be defined on every rune, along with effects.If you want to make an object, or provide a buff, do so through this proc., have both here.
 	rune_in_use = FALSE
