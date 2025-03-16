@@ -299,12 +299,6 @@
 
 	name = "[owner.real_name]'s head"
 	. = ..()
-	/* Evil cursed code, contain it in comments!
-	NOTE:	I'm not entirely sure why this is breaking re-entering
-			bodies as a ghost but it seems to be the culprit. It shouldn't
-			affect anything else though?
-			You do not get a ghost sprite if you are decapped, may need to fix later,
-			but that's nothing compared to decap nulling your body!!
 
 	if(brainmob)
 		QDEL_NULL(brainmob)
@@ -312,7 +306,7 @@
 	if(BR)
 		if(BR.brainmob)
 			QDEL_NULL(BR.brainmob)
-	*/
+
 
 //Attach a limb to a human and drop any existing limb of that type.
 /obj/item/bodypart/proc/replace_limb(mob/living/carbon/C, special)
