@@ -19,7 +19,7 @@
 	density = TRUE
 	max_integrity = 200
 	CanAtmosPass = ATMOS_PASS_DENSITY
-	climbable = TRUE
+	climbable = FALSE
 	climb_time = 0
 
 /obj/structure/arcyne_wall/Initialize()
@@ -50,7 +50,6 @@ s
 	attacked_sound = list('sound/combat/hits/onstone/wallhit.ogg', 'sound/combat/hits/onstone/wallhit2.ogg', 'sound/combat/hits/onstone/wallhit3.ogg')
 	max_integrity = 1100
 	CanAtmosPass = ATMOS_PASS_DENSITY
-	climbable = TRUE
 	climb_time = 0
 
 /obj/structure/arcyne_wall/greater/caster
@@ -123,7 +122,7 @@ s
 		playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
 		user.visible_message(span_info("[user] starts to drink from [src]."))
 		if(do_after(L, 25, target = src))
-			var/list/waterl = list(/datum/reagent/medicine/manapot = 2)
+			var/list/waterl = list(/datum/reagent/medicine/lessermanapot = 2)
 			var/datum/reagents/reagents = new()
 			reagents.add_reagent_list(waterl)
 			reagents.trans_to(L, reagents.total_volume, transfered_by = user, method = INGEST)
@@ -137,7 +136,7 @@ s
 			to_chat(user, span_warning("[W] is full."))
 			return
 		if(do_after(user, 60, target = src))
-			var/list/waterl = list(/datum/reagent/medicine/manapot = 40)
+			var/list/waterl = list(/datum/reagent/medicine/lessermanapot = 40)
 			W.reagents.add_reagent_list(waterl)
 			to_chat(user, "<span class='notice'>I fill [W] from [src].</span>")
 			playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 80, FALSE)
@@ -246,7 +245,7 @@ s
 	name = "manaflower"
 	desc = ""
 	icon = 'icons/roguetown/misc/crops.dmi'
-	icon_state = "manabloom"
+	icon_state = "manabloom2"
 	color = null
 	layer = BELOW_MOB_LAYER
 	max_integrity = 60
