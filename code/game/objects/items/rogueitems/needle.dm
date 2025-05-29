@@ -100,14 +100,14 @@
 				return
 			if((armor_value == 0 && skill_level > 0) || (armor_value > 0 && skill_level > 1)) //If not armor but skill level at least 1 or Armor and skill level at least 2
 				user.visible_message(span_info("[user] repairs [I]!"))
-				I.obj_integrity = min(I.obj_integrity + skill_multiplied, I.max_integrity)
+				I.mend_damage(skill_multiplied, TRUE)
 			else
 				if(prob(20 - user.STALUC)) //Unlucky here!
 					I.take_damage(150, BRUTE, "slash")
 					user.visible_message(span_info("[user] was extremely unlucky and ruined [I] while trying to unskillfuly repair it!"))
 					playsound(src, 'sound/foley/cloth_rip.ogg', 50, TRUE)
 				else if(prob(user.STALUC)) //Lucky here!
-					I.obj_integrity = min(I.obj_integrity + 50, I.max_integrity)
+					I.mend_damage(50, TRUE)
 					playsound(src, 'sound/magic/ahh2.ogg', 50, TRUE)
 					user.visible_message(span_info("A miracle! [user] somehow managed to repair [I] while not having a single clue what he was doing!"))
 				else
@@ -163,10 +163,10 @@
 		use(1)
 		target_wound.sew_wound()
 		if(patient == doctor)
-			doctor.visible_message(span_notice("[doctor] sews \a [target_wound.name] on [doctor.p_them()]self."), span_notice("I stitch \a [target_wound.name] on my [affecting]."))
+			doctor.visible_message(span_notice("[doctor] sews \a [target_wound.name] on [doctor.p_them()]self."), span_notice("I stitch \a [target_wound.name] on my [affecting.name]."))
 		else
 			if(affecting)
-				doctor.visible_message(span_notice("[doctor] sews \a [target_wound.name] on [patient]'s [affecting]."), span_notice("I stitch \a [target_wound.name] on [patient]'s [affecting]."))
+				doctor.visible_message(span_notice("[doctor] sews \a [target_wound.name] on [patient]'s [affecting.name]."), span_notice("I stitch \a [target_wound.name] on [patient]'s [affecting.name]."))
 			else
 				doctor.visible_message(span_notice("[doctor] sews \a [target_wound.name] on [patient]."), span_notice("I stitch \a [target_wound.name] on [patient]."))
 		log_combat(doctor, patient, "sew", "needle")

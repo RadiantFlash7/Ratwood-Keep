@@ -357,6 +357,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_mcolor2"]					>> features["mcolor2"]
 	S["feature_mcolor3"]					>> features["mcolor3"]
 	S["feature_ethcolor"]					>> features["ethcolor"]
+	S["voice_type"]							>> voice_type
 	S["virginity"]							>> virginity
 
 /datum/preferences/proc/load_character(slot)
@@ -433,7 +434,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["char_accent"]		>> char_accent
 	if (!char_accent)
 		char_accent = "No accent"
-
+	
 	//try to fix any outdated data if necessary
 	if(needs_update >= 0)
 		update_character(needs_update, S)		//needs_update == savefile_version if we need an update (positive integer)
@@ -442,6 +443,16 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	real_name = reject_bad_name(real_name)
 	gender = sanitize_gender(gender)
+
+
+	//Should help old characters with no voice type auto set it
+	S["voice_type"]		>> voice_type
+	if (!voice_type)
+		voice_type = VOICE_TYPE_MASC
+		if(gender == FEMALE)
+			voice_type = VOICE_TYPE_FEM
+
+
 	if(!real_name)
 		real_name = random_unique_name(gender)
 
@@ -473,6 +484,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	backpack			= sanitize_inlist(backpack, GLOB.backpacklist, initial(backpack))
 	jumpsuit_style	= sanitize_inlist(jumpsuit_style, GLOB.jumpsuitlist, initial(jumpsuit_style))
 	uplink_spawn_loc = sanitize_inlist(uplink_spawn_loc, GLOB.uplink_spawn_loc_list, initial(uplink_spawn_loc))
+	voice_type = sanitize_text(voice_type, VOICE_TYPE_MASC)
 	features["mcolor"]	= sanitize_hexcolor(features["mcolor"], 6, 0)
 	features["mcolor2"]	= sanitize_hexcolor(features["mcolor2"], 6, 0)
 	features["mcolor3"]	= sanitize_hexcolor(features["mcolor3"], 6, 0)
@@ -544,6 +556,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["randomise"]		, randomise)
 	WRITE_FILE(S["species"]			, pref_species.name)
 	WRITE_FILE(S["charflaw"]			, charflaw.type)
+	WRITE_FILE(S["voice_type"]			, voice_type)
 	WRITE_FILE(S["feature_mcolor"]					, features["mcolor"])
 	WRITE_FILE(S["feature_mcolor2"]					, features["mcolor2"])
 	WRITE_FILE(S["feature_mcolor3"]					, features["mcolor3"])

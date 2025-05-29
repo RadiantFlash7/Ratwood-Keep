@@ -5,7 +5,7 @@
 	var/smooth_icon = null
 	var/prettifyturf = FALSE
 	icon = 'icons/turf/roguefloor.dmi'
-	baseturfs = list(/turf/open/transparent/openspace)
+	baseturfs = /turf/open/transparent/openspace
 	neighborlay = ""
 
 /turf/open/floor/rogue/break_tile()
@@ -388,23 +388,20 @@
 
 /turf/open/floor/rogue/dirt/get_slowdown(mob/user)
 	//No tile slowdown for fairies
-	var/mob/living/carbon/human/FM = user
-	if(isseelie(FM) && !(FM.resting))	//Add wingcheck
+	if(user.is_floor_hazard_immune())
 		return 0
 
-	var/returned = slowdown
+	. = ..()
 	var/negate_slowdown = FALSE
-	for(var/obj/item/I in user.held_items)
-		if(I.walking_stick)
-			if(!I.wielded)
-				var/mob/living/L = user
-				if(!L.cmode)
-					negate_slowdown = TRUE
+	for(var/obj/item/stick in user.held_items)
+		if(stick.walking_stick && !stick.wielded && !user.cmode)
+			negate_slowdown = TRUE
+			break
 	if(HAS_TRAIT(user, TRAIT_BOG_TREKKING))
 		negate_slowdown = TRUE
 	if(negate_slowdown)
-		returned = max(returned-2, 0)
-	return returned
+		. -= 2
+	return max(., 0)
 
 
 /turf/open/floor/rogue/dirt/attack_right(mob/user)
@@ -432,7 +429,8 @@
 	..()
 	if(ishuman(O))
 		var/mob/living/carbon/human/H = O
-		if(H.shoes && !(HAS_TRAIT(H, TRAIT_LIGHT_STEP) || isseelie(H))) //Seelie hover, so they won't step on blood
+		var/skip_footsteps = HAS_TRAIT(H, TRAIT_LIGHT_STEP) || H.is_floor_hazard_immune()
+		if(H.shoes && !skip_footsteps) //Seelie hover, so they won't step on blood
 			var/obj/item/clothing/shoes/S = H.shoes
 			if(!S.can_be_bloody)
 				return
@@ -532,6 +530,7 @@
 	for(var/A in neighborlay_list)
 		cut_overlay("[A]")
 		neighborlay_list -= A
+	LAZYINITLIST(neighborlay_list)
 	var/usedturf
 	if(adjacencies & N_NORTH)
 		usedturf = get_step(src, NORTH)

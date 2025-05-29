@@ -38,7 +38,7 @@
 	lockhash = 0
 	lockid = null
 	var/lockbroken = 0
-	var/lockdiff = 0 //how hard it is to pick the lock of a door
+	var/lockdiff = 6 //how hard it is to pick the lock of a door
 	var/locksound = 'sound/foley/doors/woodlock.ogg'
 	var/unlocksound = 'sound/foley/doors/woodlock.ogg'
 	var/rattlesound = 'sound/foley/doors/lockrattle.ogg'
@@ -210,11 +210,12 @@
 	..()
 	if(door_opened)
 		return
-	if(world.time < last_bump+20)
+	// An individual door can be bumped once every two seconds to avoid spamming knocks/rattles
+	if(world.time < last_bump + 2 SECONDS)
 		return
 	last_bump = world.time
-	if(ismob(AM))
-		var/mob/user = AM
+	if(isliving(AM))
+		var/mob/living/user = AM
 		if(HAS_TRAIT(user, TRAIT_BASHDOORS))
 			if(locked)
 				user.visible_message(span_warning("[user] bashes into [src]!"))
@@ -224,20 +225,22 @@
 				force_open()
 				user.visible_message(span_warning("[user] smashes through [src]!"))
 			return
+		//And you can bump-open maybe 3 doors per second. This is to prevent weird mass door openings
+		//While keeping things feeling snappy
+		if(world.time - user.last_bumped <= 0.3 SECONDS)
+			return
 		if(locked)
 			if(istype(user.get_active_held_item(), /obj/item/key) || istype(user.get_active_held_item(), /obj/item/storage/keyring))
 				src.attackby(user.get_active_held_item(), user, TRUE)
 				return
 			rattle()
 			return
-		if(TryToSwitchState(AM))
+		if(TryToSwitchState(user))
 			if(swing_closed)
-				if(isliving(AM))
-					var/mob/living/M = AM
-					if(M.m_intent == MOVE_INTENT_SNEAK)
-						addtimer(CALLBACK(src, PROC_REF(Close), TRUE), 25)
-					else
-						addtimer(CALLBACK(src, PROC_REF(Close), FALSE), 25)
+				if(user.m_intent == MOVE_INTENT_SNEAK)
+					addtimer(CALLBACK(src, PROC_REF(Close), TRUE), 25)
+				else
+					addtimer(CALLBACK(src, PROC_REF(Close), FALSE), 25)
 
 
 /obj/structure/mineral_door/attack_paw(mob/user)
@@ -264,7 +267,7 @@
 			if(L.m_intent == MOVE_INTENT_SNEAK)
 				to_chat(user, span_warning("This door is locked."))
 				return
-		if(world.time >= last_bump+20)
+		if(world.time >= last_bump+2 SECONDS)
 			last_bump = world.time
 			playsound(src, 'sound/foley/doors/knocking.ogg', 100)
 			user.visible_message(span_warning("[user] knocks on [src]."), \
@@ -277,23 +280,30 @@
 		return !opacity
 	return !density
 
-/obj/structure/mineral_door/proc/TryToSwitchState(atom/user)
-	if(isSwitchingStates || !anchored)
-		return
-	if(isliving(user))
-		var/mob/living/M = user
-		if(world.time - M.last_bumped <= 60)
-			return //NOTE do we really need that?
-		if(M.client)
-			if(iscarbon(M))
-				var/mob/living/carbon/C = M
-				if(!C.handcuffed)
-					if(C.m_intent == MOVE_INTENT_SNEAK)
-						SwitchState(TRUE)
-					else
-						SwitchState()
-			else
-				SwitchState()
+/obj/structure/mineral_door/CanAStarPass(ID, to_dir, datum/caller)
+	. = ..()
+	if(.) // we can already go through it
+		return TRUE
+	if(!anchored)
+		return FALSE
+	if(HAS_TRAIT(caller, TRAIT_BASHDOORS))
+		return TRUE // bash into it!
+	// it's openable
+	return ishuman(caller) && !locked // only humantype mobs can open doors, as funny as it'd be for a volf to walk in on you ERPing
+
+/obj/structure/mineral_door/proc/TryToSwitchState(mob/living/user)
+	if(!isliving(user) || isSwitchingStates || !anchored)
+		return FALSE
+	if(ishuman(user))
+		var/mob/living/carbon/human/human_user = user
+		// must have a client or be trying to pass through the door
+		if(!human_user.client && !length(human_user.myPath))
+			return FALSE
+		if(human_user.handcuffed)
+			return FALSE
+	else if(!user.client) // simplemobs aren't allowed to pathfind through doors, currently
+		return FALSE
+	SwitchState(user.m_intent == MOVE_INTENT_SNEAK) // silent when sneaking
 	return TRUE
 
 /obj/structure/mineral_door/proc/SwitchState(silent = FALSE)
