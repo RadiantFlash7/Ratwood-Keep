@@ -172,10 +172,6 @@
 
 	target.visible_message(span_warning("[target.real_name]'s body is engulfed by dark energy..."), runechat_message = TRUE)
 
-	// Undead have infinite stamina; they should not be using swift intent under any circumstances.
-	if (istype(target.rmb_intent, /datum/rmb_intent/swift))
-		target.swap_rmb_intent(null, 1)
-
 	if(target.ckey) //player still inside body
 
 		var/offer = alert(target, "Do you wish to be reanimated as a minion?", "RAISED BY NECROMANCER", "Yes", "No")
@@ -189,6 +185,9 @@
 			to_chat(target, span_danger("You rise as a minion."))
 			target.turn_to_minion(user, target.ckey)
 			target.visible_message(span_warning("[target.real_name]'s eyes light up with an evil glow."), runechat_message = TRUE)
+
+			if (target.mind)
+				target.mind.add_special_person(user, "#BA00BA")
 			return TRUE
 
 	if(!target.ckey || offer_refused) //player is not inside body or has refused, poll for candidates
@@ -200,6 +199,9 @@
 			var/mob/C = pick(candidates)
 			target.turn_to_minion(user, C.ckey)
 			target.visible_message(span_warning("[target.real_name]'s eyes light up with an eerie glow."), runechat_message = TRUE)
+			
+			if (target.mind)
+				target.mind.add_special_person(user, "#BA00BA")
 
 		//no candidates, raise as npc
 		else
@@ -273,10 +275,6 @@
 	target.set_necrotarget(TRUE)
 	target.visible_message(span_warning("[target.real_name]'s body is engulfed by dark energy..."), runechat_message = TRUE)
 
-	// Undead have infinite stamina; they should not be using swift intent under any circumstances.
-	if (istype(target.rmb_intent, /datum/rmb_intent/swift))
-		target.swap_rmb_intent(null, 1)
-
 	if(user.mind.boneboys < user.mind.bonemax)
 		to_chat(user, span_warning("I have the capacity to sustain another self aware skeleton!"))
 
@@ -299,6 +297,9 @@
 				target.mind.set_boneboy(TRUE)
 				target.mind.set_bonenecro(user)
 				target.set_necrotarget(FALSE)
+
+				if (target.mind)
+					target.mind.add_special_person(user, "#BA00BA")
 				return TRUE
 
 		if(!target.ckey || offer_refused) //player is not inside body or has refused, poll for candidates
@@ -314,6 +315,8 @@
 				target.mind.set_boneboy(TRUE)
 				target.mind.set_bonenecro(user)
 
+				if (target.mind)
+					target.mind.add_special_person(user, "#BA00BA")
 			//no candidates, raise as npc
 			else
 				to_chat(user, span_warning("There are no souls to raise, this one shall be mindless.."))
@@ -416,6 +419,16 @@
 		QDEL_NULL(charflaw)
 
 	can_do_sex = FALSE //where my bonger go
+
+	// Undead have infinite stamina; they should not be using swift intent under any circumstances.
+	target.possible_rmb_intents = list(/datum/rmb_intent/feint,\
+		/datum/rmb_intent/aimed,\
+		/datum/rmb_intent/strong,\
+		/datum/rmb_intent/riposte,\
+		/datum/rmb_intent/weak)
+
+	if (istype(target.rmb_intent, /datum/rmb_intent/swift))
+		target.swap_rmb_intent(null, 1)
 
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC) //Why wasn't this a thing from the start
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
