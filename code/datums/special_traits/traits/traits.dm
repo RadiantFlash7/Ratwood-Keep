@@ -17,17 +17,26 @@
 	character.change_stat("perception", 2)
 	ADD_TRAIT(character, TRAIT_BREADY, "[type]")
 
+/datum/special_trait/latentmagic
+	name = "Latent Magic"
+	greet_text = span_notice("I have innate magical potential.")
+	restricted_jobs = list(KING_QUEEN_ROLES, GARRISON_ROLES, CHURCH_ROLES, INQUISITION_ROLES)	//Not for royalty, guards, church or inquisition
+	weight = 40
+
+/datum/special_trait/latentmagic/on_apply(mob/living/carbon/human/character, silent)
+	character.mind.adjust_skillrank(/datum/skill/magic/arcane, 3, TRUE)
+	character.mind.AddSpell(new SPELL_LEARNSPELL)
 
 /datum/special_trait/curseofcain
 	name = "Flawed Immortality"
-	greet_text = span_notice("I've never needed to eat, drink or even breathe... In fact the stench of death does not bother me.")
+	greet_text = span_notice("I feel like I don't need to eat anymore, and my veins feel empty... Is this normal?")
 	restricted_jobs = list(INQUISITION_ROLES)
-	weight = 80
+	weight = 40
 
 /datum/special_trait/curseofcain/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_NOHUNGER, "[type]")
 	ADD_TRAIT(character, TRAIT_NOBREATH, "[type]")
-	ADD_TRAIT(character, TRAIT_NOSTINK, "[type]")
+	ADD_TRAIT(character, TRAIT_BLOODLOSS_IMMUNE, "[type]")
 
 
 /datum/special_trait/desensitized
@@ -96,6 +105,27 @@
 /datum/special_trait/beautiful/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_BEAUTIFUL, "[type]")
 	ADD_TRAIT(character, TRAIT_GOODLOVER, "[type]")
+
+/datum/special_trait/eagle_eyed
+	name = "Eagle Eyed"
+	greet_text = span_notice("With my sharp aim I could always hit distant targets, I've also hidden a crossbow and some bolts.")
+	weight = 50
+
+/datum/special_trait/eagle_eyed/on_apply(mob/living/carbon/human/character, silent)
+	character.change_stat("perception", 2)
+	character.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 5, TRUE)
+	character.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 4, TRUE)
+	character.mind.special_items["Crossbow"] = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	character.mind.special_items["Bolts"] = /obj/item/quiver/bolts
+
+/datum/special_trait/tombraider
+	name = "Tomb Raider"
+	greet_text = span_notice("It belongs in a museum. I have a whip hidden and I know how to use it.")
+	weight = 50
+
+/datum/special_trait/tombraider/on_apply(mob/living/carbon/human/character, silent)
+	character.mind.special_items["Whip"] = /obj/item/weapon/whip/antique
+	character.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
 
 /datum/special_trait/duelist
 	name = "Legendary duelist"
@@ -260,7 +290,7 @@
 
 
 /datum/special_trait/graggar_champion
-	name = "Graggar's Little Champ"
+	name = "Graggar's Champion"
 	greet_text = span_notice("A life of devotion to Graggar has taught me how to chew through flesh and bone alike with ease.")
 	req_text = "Worship Graggar"
 	allowed_patrons = list(/datum/patron/inhumen/graggar)
@@ -468,6 +498,25 @@
 	ring.desc = "The name of [character.real_name] can be seen engraved on ring's inner side."
 	character.put_in_hands(ring, forced = TRUE)
 
+/datum/special_trait/skeleton
+	name = "Skeleton"
+	greet_text = span_boldwarning("I was- am afflicted with a curse by a lich that left me without my flesh but i still retained controls..(This is not a antagonist role, expect to be attacked unless wearing something to cover your head.)")
+	allowed_jobs = list(/datum/job/roguetown/refugee)
+	req_text = "Be a Pilgrim."
+	weight = 20
+
+/datum/special_trait/skeleton/on_apply(mob/living/carbon/human/character, silent)
+	character.skeletonize(FALSE)
+	character.skele_look()
+	character.grant_undead_eyes()
+	ADD_TRAIT(character, TRAIT_NOLIMBDISABLE, "[type]")
+	ADD_TRAIT(character, TRAIT_EASYDISMEMBER, "[type]")
+	ADD_TRAIT(character, TRAIT_LIMBATTACHMENT, "[type]")
+	ADD_TRAIT(character, TRAIT_NOHUNGER, "[type]")
+	ADD_TRAIT(character, TRAIT_NOBREATH, "[type]")
+	ADD_TRAIT(character, TRAIT_NOPAIN, "[type]")
+	ADD_TRAIT(character, TRAIT_TOXIMMUNE, "[type]")
+	character.update_body()
 
 /datum/special_trait/reps_redemption
 	name = "Reps for Redemption"
